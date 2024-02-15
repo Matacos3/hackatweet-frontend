@@ -5,6 +5,9 @@ import { useState } from "react"
 import Signup from "../components/Signup"
 import Signin from "../components/Signin"
 
+import Image from 'next/image';
+
+
 console.log(logo.src)
 
 
@@ -40,7 +43,7 @@ function Login() {
   >
     <div className={styles.maincontainer}>
       <div className={styles.imgContainer}>
-        <img id={styles.logo} src={logo.src} alt="logo" />
+        <Image id={styles.logo} src={logo.src} alt="logo" />
       </div>
       <div className={styles.separator}>
 
@@ -56,7 +59,7 @@ function Login() {
           Arleady have an account ?
         </h3>
         <button className={styles.button} id={styles.signin} onClick={()=>handleLoginModal()}>Sign in</button>
-        <div id="react-modals" className={styles.modal}>
+        <div id="react-modals" className={styles.modal} width={500} layout="fill">
           <Modal
             getContainer="#react-modals"
             open={isLoginModalVisible}

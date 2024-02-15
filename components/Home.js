@@ -1,19 +1,22 @@
 import styles from '../styles/Home.module.css';
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import logo from "../images/seuleimg.png"
+import Image from 'next/image';
 
 
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../reducers/user";
 import { useRouter } from "next/router";
 
-
+import Tweet from "../components/Tweet"
 import Link from 'next/link';
 
 function Home() {
   const dispatch = useDispatch()
   const connected = useSelector((state) => state.user.value)
   const router = useRouter();
+
+  const [newTweetText, setNewTweetText] = useState("")
 
   console.log(connected)
   useEffect(() => {
@@ -22,25 +25,45 @@ function Home() {
     }
   }, [connected.token, router]);
 
+  
+
   return (
     <div className={styles.all}>
       <div className={styles.leftpart}>
-        <img id={styles.logo} src={logo.src} alt="logo" />
+        <Image src={logo.src} alt="logo" height={30} width={35} />
         <div id={styles.user}>
           <div id={styles.userinfos}>
 
-            <img id={styles.logo} src={logo.src} alt="logo" />
+            <Image src={logo.src} alt="logo" height={30} width={35}/>
             <div id={styles.userinfostext}>
-              <h4>John</h4>
-              <p>@JohnCena</p>
+              <h4 id={styles.firstname}>John</h4>
+              <p id={styles.username}>@JohnCena</p>
             </div>
           </div>
-          <button id={styles.button }onClick={() => dispatch(logout())}>Logout</button>
+          <button className={styles.button} onClick={() => dispatch(logout())}>Logout</button>
         </div>
       </div>
+
       <main className={styles.main}>
-        <h1>Home</h1>
-        <Link href="/login">Se connecter</Link>
+        <div id={styles.newtweet}>
+          <div id={styles.titlenewtweet}>
+
+            <h1 id={styles.title}>Home</h1>
+          </div>
+          <div id={styles.inputcontainer}>
+            <textarea id={styles.container} placeholder='What’s new ?' rows="3" onChange={(e)=>setNewTweetText(e.target.value)} value={newTweetText} maxlength="280"/>
+          </div>
+          <div id={styles.newtweetinfos}>
+            <div id={styles.newtweetinfoscontainer}>
+              <p>{newTweetText.length}/280</p>
+              <button className={styles.button}>Tweet</button>
+            </div>
+          </div>
+        </div>
+        <div>
+          <Tweet firstname="John" username="JohnDoe" time="today" content="Je suis content d’être en vie"/>
+        </div>
+
       </main>
     </div>
   );

@@ -16,7 +16,7 @@
 
 .textinput{
   background: none ;
-  font-family: Gar;
+  font-family: Garit;
   margin: 3px;
   border: 1px solid black;
   padding: 5px;
@@ -43,4 +43,11 @@
 }
 #logo{
   height: 30px;
+}
+
+#newtweet{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }

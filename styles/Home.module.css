@@ -1,16 +1,9 @@
-.all{
+.all {
   display: flex;
   align-items: center;
+  height: 100vh;
 }
 
-.main {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  padding: 4rem 0;
-}
 
 .title {
   line-height: 1.15;
@@ -22,51 +15,124 @@
   text-decoration: none;
 }
 
-.title a:hover, .title a:focus, .title a:active {
+.title a:hover,
+.title a:focus,
+.title a:active {
   text-decoration: underline;
 }
 
-.leftpart{
+.leftpart {
   width: 25vw;
   border-right: 1px solid black;
   height: 95vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
+  padding: 0 40px;
 }
 
-#logo{
-  height: 30px;
+.logo {
   margin: 15px;
 }
 
 
-#user{
+#user {
   display: flex;
   flex-direction: column;
 }
 
-#userinfos{
+#userinfos {
   display: flex;
   align-items: center;
 
 }
 
-#button{
+.button {
   background: none;
   border: 1px dashed black;
-  width: 150px;
-  height: 40px;
   font-family: Garit;
-  font-size: 1.5rem;
-  padding: 3px;
+  font-size: 0.8rem;
   margin: 5px;
+  width: 50px;
+  padding: 5px;
 }
 
-#button:hover{
-  
+.button:hover {
+
   cursor: pointer;
   transform: scale(1.1);
-  
+
+}
+
+#userinfostext {
+  margin-left: 10px;
+  display: block;
+}
+
+#firstname {
+  margin: 0;
+}
+
+#username {
+  margin-top: 4px;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+
+  border-right: solid 1px black;
+  width: 50vw;
+  align-items: center;
+  height: 95vh;
+}
+
+#newtweet{
+  height: 18vh ;
+  border-bottom: dashed 1px black;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#titlenewtweet{
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+}
+#title{
+  margin: 0;
+  margin-left: 10px;
+}
+#inputcontainer{
+  width:85%;
+  margin: 10px;
+}
+#container{
+  width: 100%;
+  background: none;
+  border:none;
+  border-bottom: 1px black dashed ;
+  font-family: Garit;
+  font-size: 1rem;
+  resize: none;
+}
+
+#container:focus{
+  outline: 1px  grey dashed;
+}
+
+#newtweetinfos{
+  display: flex;
+  width: 85%;
+  justify-content: flex-end;
+}
+#newtweetinfoscontainer{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
 }
