@@ -1,0 +1,46 @@
+@font-face {
+  font-family: Gar;
+  src: url("../fonts/GARA.TTF");
+}
+
+#title{
+  font-size: 1.6rem;
+}
+.signupwindow{
+  font-family: Gar;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.textinput{
+  background: none ;
+  font-family: Gar;
+  margin: 3px;
+  border: 1px solid black;
+  padding: 5px;
+  color: black;
+  font-size: 1.2rem;
+}
+
+.textinput:focus{
+  outline: none;
+}
+
+.button{
+  background: none;
+  font-family: Gar;
+  border: 1px black dashed;
+  padding: 5px;
+  cursor: pointer;
+  margin: 8px;
+  font-size: 1.2rem;
+}
+
+.button:hover{
+  transform: scale(1.1);
+}
+#logo{
+  height: 30px;
+}
