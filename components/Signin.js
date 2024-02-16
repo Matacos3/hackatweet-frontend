@@ -28,7 +28,7 @@ function Signin() {
     }).then(response => response.json())
       .then(data =>{
         if(data.result===true){
-          dispatch(login({token : data.token, username : username}))
+          dispatch(login({token : data.token, username : username, firstname : data.firstname}))
           router.push("/")
         }
       })

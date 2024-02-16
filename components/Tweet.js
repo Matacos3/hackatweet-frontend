@@ -3,6 +3,8 @@ import Image from 'next/image';
 import source from "../images/user_img.jpg"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faHeart} from '@fortawesome/free-solid-svg-icons';
+import { useDispatch, useSelector } from "react-redux";
+
 
 function Tweet(props) {
 
@@ -20,7 +22,7 @@ function Tweet(props) {
         </div>
 
         <h5 id={styles.firstname}>{props.firstname}</h5>
-        <p id={styles.username}>{props.username}</p>
+        <p id={styles.username}>@{props.username}</p>
         <p id={styles.time}>{props.time}</p>
       </div>
       <div id={styles.textcontent}>
@@ -28,7 +30,7 @@ function Tweet(props) {
       </div>
       <div id={styles.iconspace}>
       <FontAwesomeIcon onClick={() => handleLike()} icon={faHeart} className={styles.likeIcon} />
-      <p>{props.likes}</p>
+      <p>{props.isLiked}</p>
       </div>
     </div>
   )

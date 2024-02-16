@@ -18,7 +18,9 @@ function Home() {
 
   const [newTweetText, setNewTweetText] = useState("")
 
-  console.log(connected)
+  const [tweetsDatas, setTweetsDatas] = useState([])
+
+  // console.log(connected)
   useEffect(() => {
     if (!connected.token) {
       router.push('/login');
@@ -26,10 +28,40 @@ function Home() {
   }, [connected.token, router]);
 
 
+  const getTweets = () =>{
+    fetch("http://localhost:3000/tweets")
+    .then(response=>response.json())
+    .then(data =>{
+      console.log("je prends un nouveau tweet")
+      console.log(data.tweets)
+      setTweetsDatas(data.tweets)
+    })
+  }
   const addNewTweet = () =>{
-    console.log(newTweetText)
+    fetch('http://localhost:3000/tweets/create', {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+      body:JSON.stringify({content:newTweetText, token:connected.token})
+    }).then(response => response.json())
+    .then(()=>{
+      getTweets()
+      setNewTweetText("")
+    })
   }
 
+
+  useEffect(()=>{
+   
+      getTweets()
+
+  },[])
+
+
+  const tweets = tweetsDatas.sort((a,b)=>new Date(b.createdDate) - new Date(a.createdDate)).map((data, i)=>{
+    const userHasLikedTweet = data.isLiked.some(likers => likers.token === connected.token)
+
+    return <Tweet key={i} firstname={data.author.firstname} content={data.content} username={data.author.username} time={data.createdDate} isLiked={data.isLiked.length} userHasLikedTweet={userHasLikedTweet}/>
+  })
   return (
     <div className={styles.all}>
       <div className={styles.leftpart}>
@@ -39,8 +71,8 @@ function Home() {
 
             <Image src={logo.src} alt="logo" height={30} width={35}/>
             <div id={styles.userinfostext}>
-              <h4 id={styles.firstname}>John</h4>
-              <p id={styles.username}>@JohnCena</p>
+              <h4 id={styles.firstname}>{connected.firstname}</h4>
+              <p id={styles.username}>@{connected.username}</p>
             </div>
           </div>
           <button className={styles.button} onClick={() => dispatch(logout())}>Logout</button>
@@ -69,7 +101,8 @@ function Home() {
 
         {/* espace de d’affichage des tweets */}
         <div className={styles.tweetsSpace}>
-          <Tweet firstname="John" username="JohnDoe" time="today" content="Je suis content d’être en vie" likes={8}/>
+
+          {tweets}
         </div>
 
       </main>

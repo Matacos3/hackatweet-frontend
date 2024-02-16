@@ -29,7 +29,7 @@ function Signup() {
     }).then(response => response.json())
       .then(data =>{
         if(data.result===true){
-          dispatch(login({token : data.user.token, username : username}))
+          dispatch(login({token : data.user.token, username : username, firstname : firstname}))
           router.push("/")
         }
       })
