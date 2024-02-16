@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 function Tweet(props) {
 
   const connected = useSelector((state) => state.user.value)
-  const [tweetInfos, setTweetInfos] = useState(props)
+  const [likeNumber, setLikeNumbers] = useState(props.isLiked)
 
   const handleLike = () =>{
 
@@ -24,7 +24,7 @@ function Tweet(props) {
 
     )
     .then(response=>response.json())
-    .then(data=>console.log(data))
+    .then(data=>setLikeNumbers(data.isLiked.length))
 
 
 
@@ -46,7 +46,7 @@ function Tweet(props) {
       </div>
       <div id={styles.iconspace}>
       <FontAwesomeIcon onClick={() => handleLike()} icon={faHeart} className={styles.likeIcon} />
-      <p>{props.isLiked}</p>
+      <p>{likeNumber}</p>
       </div>
     </div>
   )

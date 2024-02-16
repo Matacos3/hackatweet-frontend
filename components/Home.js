@@ -45,7 +45,7 @@ function Home() {
       body:JSON.stringify({content:newTweetText, token:connected.token})
     }).then(response => response.json())
     .then(()=>{
-      // getTweets()
+      getTweets()
       setNewTweetText("")
     })
   }
