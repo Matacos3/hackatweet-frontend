@@ -38,7 +38,7 @@ function Signup() {
   console.log(firstname, username, password)
   return (
     <div className={styles.signupwindow}>
-      <Image id={styles.logo} src={logo.src} alt="logo" height={30} layout="fill"/>
+      <Image id={styles.logo} src={logo.src} alt="logo" height={30} width={35}/>
       <h2 id={styles.title}>Create your Hackatweet account</h2>
       <input className={styles.textinput}type="text" placeholder="Firstname" onChange={e=>setFirstname(e.target.value)} value={firstname}/>
       <input className={styles.textinput}type="text" placeholder="Username"onChange={e=>setUsername(e.target.value)} value={username}/>

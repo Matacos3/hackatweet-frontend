@@ -43,7 +43,7 @@ function Login() {
   >
     <div className={styles.maincontainer}>
       <div className={styles.imgContainer}>
-        <Image id={styles.logo} src={logo.src} alt="logo" />
+        <Image id={styles.logo} src={logo.src} height={500} width={550}alt="logo" />
       </div>
       <div className={styles.separator}>
 

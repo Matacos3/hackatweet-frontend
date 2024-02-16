@@ -25,7 +25,10 @@ function Home() {
     }
   }, [connected.token, router]);
 
-  
+
+  const addNewTweet = () =>{
+    console.log(newTweetText)
+  }
 
   return (
     <div className={styles.all}>
@@ -45,23 +48,28 @@ function Home() {
       </div>
 
       <main className={styles.main}>
+
+        {/* espace de création des tweets */}
         <div id={styles.newtweet}>
           <div id={styles.titlenewtweet}>
 
             <h1 id={styles.title}>Home</h1>
           </div>
           <div id={styles.inputcontainer}>
-            <textarea id={styles.container} placeholder='What’s new ?' rows="3" onChange={(e)=>setNewTweetText(e.target.value)} value={newTweetText} maxlength="280"/>
+            <textarea id={styles.container} placeholder='What’s new ?' rows="3" onChange={(e)=>setNewTweetText(e.target.value)} value={newTweetText} maxLength="280"/>
           </div>
           <div id={styles.newtweetinfos}>
             <div id={styles.newtweetinfoscontainer}>
               <p>{newTweetText.length}/280</p>
-              <button className={styles.button}>Tweet</button>
+              <button className={styles.button} onClick={()=>addNewTweet()}>Tweet</button>
             </div>
           </div>
         </div>
-        <div>
-          <Tweet firstname="John" username="JohnDoe" time="today" content="Je suis content d’être en vie"/>
+
+
+        {/* espace de d’affichage des tweets */}
+        <div className={styles.tweetsSpace}>
+          <Tweet firstname="John" username="JohnDoe" time="today" content="Je suis content d’être en vie" likes={8}/>
         </div>
 
       </main>
