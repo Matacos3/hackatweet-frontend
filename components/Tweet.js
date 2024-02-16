@@ -3,13 +3,29 @@ import Image from 'next/image';
 import source from "../images/user_img.jpg"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faHeart} from '@fortawesome/free-solid-svg-icons';
+import {useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 
 function Tweet(props) {
 
+  const connected = useSelector((state) => state.user.value)
+  const [tweetInfos, setTweetInfos] = useState(props)
+
   const handleLike = () =>{
-    console.log("pour liker")
+
+    console.log(props.id)
+    fetch(`http://localhost:3000/tweets/like/${props.id}`,{
+      method : "PUT",
+      headers : {"Content-Type" : "application/json"},
+      body:JSON.stringify({token : connected.token})
+
+    }
+
+    )
+    .then(response=>response.json())
+    .then(data=>console.log(data))
+
 
 
   }

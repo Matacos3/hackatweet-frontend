@@ -15,6 +15,7 @@ function Home() {
   const dispatch = useDispatch()
   const connected = useSelector((state) => state.user.value)
   const router = useRouter();
+  console.log(connected)
 
   const [newTweetText, setNewTweetText] = useState("")
 
@@ -44,7 +45,7 @@ function Home() {
       body:JSON.stringify({content:newTweetText, token:connected.token})
     }).then(response => response.json())
     .then(()=>{
-      getTweets()
+      // getTweets()
       setNewTweetText("")
     })
   }
@@ -60,7 +61,7 @@ function Home() {
   const tweets = tweetsDatas.sort((a,b)=>new Date(b.createdDate) - new Date(a.createdDate)).map((data, i)=>{
     const userHasLikedTweet = data.isLiked.some(likers => likers.token === connected.token)
 
-    return <Tweet key={i} firstname={data.author.firstname} content={data.content} username={data.author.username} time={data.createdDate} isLiked={data.isLiked.length} userHasLikedTweet={userHasLikedTweet}/>
+    return <Tweet key={i} firstname={data.author.firstname} content={data.content} username={data.author.username} time={data.createdDate} isLiked={data.isLiked.length} id={data._id} userHasLikedTweet={userHasLikedTweet} />
   })
   return (
     <div className={styles.all}>
