@@ -2,19 +2,24 @@ import styles from "../styles/Tweet.module.css"
 import Image from 'next/image';
 import source from "../images/user_img.jpg"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faHeart} from '@fortawesome/free-solid-svg-icons';
-import {useState} from "react";
+import {faHeart, faTrashCan} from '@fortawesome/free-solid-svg-icons';
+import {useState, useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
+
+import moment from 'moment';
+import "moment/locale/fr"
 
 
 function Tweet(props) {
 
   const connected = useSelector((state) => state.user.value)
-  const [likeNumber, setLikeNumbers] = useState(props.isLiked)
+ 
+  
+  
 
   const handleLike = () =>{
 
-    console.log(props.id)
+    console.log(textContent)
     fetch(`http://localhost:3000/tweets/like/${props.id}`,{
       method : "PUT",
       headers : {"Content-Type" : "application/json"},
@@ -24,11 +29,39 @@ function Tweet(props) {
 
     )
     .then(response=>response.json())
-    .then(data=>setLikeNumbers(data.isLiked.length))
+    .then(data=>{
+      // setLikeNumbers(data.isLiked.length)
+      // setTweetIsLiked(!tweetIsLiked)
+      props.getTweets()
+    }
+      )
 
 
 
   }
+  
+  const handleDelete = () =>{
+    console.log("c’est pour supprimer")
+    fetch(`http://localhost:3000/tweets/isActive/${props.id}`,{
+      method:"PUT",
+      headers:{"Content-Type" : "application/json"}
+    })
+    .then(response=>response.json())
+    .then(data=>{
+      props.getTweets()
+    })
+    
+  }
+
+  const textContent = props.content.split(" ").map(word => {
+    if(props.hashtags.includes(word.slice(1))){
+      return <span className={styles.hashtags}> {word}</span>
+    }else{
+      return <span> {word}</span>
+    }
+    
+  })
+
   return (
     <div className={styles.tweets}>
       <div id={styles.header}>
@@ -39,14 +72,15 @@ function Tweet(props) {
 
         <h5 id={styles.firstname}>{props.firstname}</h5>
         <p id={styles.username}>@{props.username}</p>
-        <p id={styles.time}>{props.time}</p>
+        <p id={styles.time}>{moment(props.time).fromNow()}</p>
       </div>
       <div id={styles.textcontent}>
-        {props.content}
+        {textContent}
       </div>
       <div id={styles.iconspace}>
-      <FontAwesomeIcon onClick={() => handleLike()} icon={faHeart} className={styles.likeIcon} />
-      <p>{likeNumber}</p>
+      <FontAwesomeIcon onClick={() => handleLike()} icon={faHeart} className={styles.icon} style={{color : props.userHasLikedTweet && "#776959"}} />
+      <p style={{color : props.userHasLikedTweet && "#776959"}}>{props.isLiked}</p>
+      <FontAwesomeIcon onClick={()=>handleDelete()} icon={faTrashCan} className={styles.icon} style={{display : !props.userIsAuthor && "none"}}/>
       </div>
     </div>
   )

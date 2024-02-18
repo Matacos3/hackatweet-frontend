@@ -58,10 +58,13 @@ function Home() {
   },[])
 
 
+
   const tweets = tweetsDatas.sort((a,b)=>new Date(b.createdDate) - new Date(a.createdDate)).map((data, i)=>{
     const userHasLikedTweet = data.isLiked.some(likers => likers.token === connected.token)
 
-    return <Tweet key={i} firstname={data.author.firstname} content={data.content} username={data.author.username} time={data.createdDate} isLiked={data.isLiked.length} id={data._id} userHasLikedTweet={userHasLikedTweet} />
+    const userIsAuthor = data.author.token === connected.token
+
+    return <Tweet key={i} firstname={data.author.firstname} content={data.content} username={data.author.username} time={data.createdDate} isLiked={data.isLiked.length} id={data._id} userHasLikedTweet={userHasLikedTweet} userIsAuthor={userIsAuthor} getTweets={getTweets} hashtags={data.hashtag}/>
   })
   return (
     <div className={styles.all}>

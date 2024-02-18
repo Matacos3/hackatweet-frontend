@@ -57,8 +57,14 @@
 
 }
 
-.likeIcon{
+.icon{
   margin-right: 5px;
+  margin-left: 5px;
+  cursor: pointer;
 }
 
-
+.hashtags{
+  color:#423a31;
+  font-family: Garbold;
+  cursor:pointer;
+}
